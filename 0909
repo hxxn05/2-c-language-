@@ -1,0 +1,338 @@
+# 31. 수열과 구간 쿼리 4
+
+### 내 코드
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int arr[], size_t arr_len, int** queries, size_t queries_rows, size_t queries_cols) 
+{
+    
+    int* answer = (int*)malloc(sizeof(int) * arr_len);
+    
+    for (int i = 0; i < queries_rows; i++) 
+    {
+        for (int j = queries[i][0]; j <= queries[i][1]; j++) 
+        {
+            if (j % queries[i][2] == 0)
+                arr[j]++;
+        }
+    }
+    
+    for (int i = 0; i < arr_len; i++)
+        answer[i] = arr[i];
+    
+    return answer;
+}
+```
+
+### 다른 사람 코드
+
+```jsx
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// arr_len은 배열 arr의 길이입니다.
+// queries_rows는 2차원 배열 queries의 행 길이, queries_cols는 2차원 배열 queries의 열 길이입니다.
+int* solution(int arr[], size_t arr_len, int** queries, size_t queries_rows, size_t queries_cols) {
+    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
+    int* answer = (int*)malloc(sizeof(int) * arr_len);
+    for(int i = 0; i < arr_len; i++) answer[i] = arr[i];
+
+    for(int rowidx = 0; rowidx < queries_rows; rowidx++)
+    {
+        int s = queries[rowidx][0];
+        int e = queries[rowidx][1];
+        int k = queries[rowidx][2];
+
+        for(int arridx = s; arridx <= e; arridx++)
+        {
+            if(arridx % k == 0) answer[arridx]++;
+        }
+    }
+    return answer;
+}
+```
+
+<aside>
+💡
+
+차이점:  나는 solution 함수의 동작에서 arr을 직접 수정하고 다른 사람은 answer이라는 별도의 배열을 만들어 수정 후 반환함. 
+
+</aside>
+
+---
+
+# 32. 배열 만들기 2
+
+### 내 코드
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int l, int r) 
+{
+    int* answer = (int*)malloc(sizeof(int) * 1000000);
+    int point = 0, check = 0;
+    int idx = 0, temp;
+    
+    for (int i = l; i <= r; i++) 
+    {
+        temp = i;
+        point = 0, check = 0;
+        
+        while (temp > 0) 
+        {
+            if (temp % 10 == 0 || temp % 10 == 5)
+                check++;
+            point++;
+            temp /= 10;
+        }
+        
+        if (check == point) 
+        {
+            answer[idx++] = i;
+        }
+    }
+    
+    if (idx == 0)
+        answer[idx] = -1;
+    
+    return answer;
+}
+
+```
+
+### 다른 사람 코드
+
+```jsx
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int IsOk(int num) {
+    while(num) {
+        int a = num % 10;
+        num /= 10;
+        if(a == 0 || a == 5) continue;
+        return 0;
+    }
+    return 1;
+}
+int* solution(int l, int r) {
+    int* answer = (int*)malloc(64 * sizeof(int)), cnt = 0;
+    for(int num = l; num <= r; num++) {
+        if(IsOk(num)) answer[cnt++] = num;
+    }
+    if(!cnt) answer[0] = -1, cnt = 1;
+    answer = (int*)realloc(answer, cnt * sizeof(int));
+    return answer;
+}
+```
+
+<aside>
+💡
+
+차이점: 나는 직접 배열을 수정했는데, 다른 사람은 `IsOk` 함수를 사용하고 `realloc`으로 배열 크기를 조정함
+
+</aside>
+
+---
+
+# 33. 카운트 업
+
+### 내 코드
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int start_num, int end_num) 
+{
+    int* answer = (int*)malloc((end_num - start_num + 1) * sizeof(int));
+    int idx = 0;
+        
+    for (int i = start_num; i <= end_num; i++) 
+        answer[idx++] = i;
+    
+    return answer;
+}
+```
+
+V
+
+### 다른 사람 코드
+
+```jsx
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int start, int end) {
+    int* answer = (int*)malloc((end - start + 1) * sizeof(int));
+    int* ptr = answer;
+    for(int num = start; num <= end; num++) *ptr++ = num;
+    return answer;
+}
+```
+
+<aside>
+💡
+
+차이점: 나는 배열의 인덱스를 사용해 값을 할당했는데, 다른 사람은 포인터를 직접 이동시키면서 배열에 값을 할당함.
+
+</aside>
+
+---
+
+# 34. 콜라츠 수열 만들기
+
+### 내 코드
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int n) 
+{
+    int* answer = (int*)malloc(sizeof(int) * 1000);
+    int idx = 0;
+    
+    while (1) 
+    {
+        answer[idx++] = n;
+        
+        if (n == 1)
+            break;
+        
+        if (n % 2 == 0)
+            n /= 2;
+        else
+            n = 3 * n + 1;
+    }
+    
+    return answer;
+}
+```
+
+### 다른 사람 코드
+
+```jsx
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* arr(int n, int idx)
+{
+    int* ansarr;
+    if(n == 1)
+    {
+        ansarr = (int*)malloc(sizeof(int) * idx + 1);
+        ansarr[idx] = n;
+        return ansarr;
+    }
+
+    int Data = n;
+    if(Data % 2 == 0) Data /= 2;
+    else Data = Data * 3 + 1;
+
+    ansarr = arr(Data, idx + 1);
+    ansarr[idx] = n;
+    return ansarr;
+}
+
+int* solution(int n) {
+    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
+    int* answer = arr(n, 0);
+    return answer;
+}
+```
+
+<aside>
+💡
+
+차이점: 나는 반복문을 사용해 배열을 직접 수정했는데, 다른 사람은 재귀를 사용해 배열을 생성하고 값을 할당함. 
+
+</aside>
+
+---
+
+# 35. 배열 만들기 4
+
+### 내 코드
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int* solution(int arr[], size_t arr_len) 
+{
+    int* stk = (int*)malloc(sizeof(int) * 100000);
+    int i = 0;
+    int idx = 0;
+    
+    while (i < arr_len) 
+    {
+        if (idx == 0)
+            stk[idx++] = arr[i++];
+        else 
+        {
+            if (stk[idx - 1] < arr[i])
+                stk[idx++] = arr[i++];
+            else 
+            {
+                stk[idx - 1] = 0;
+                idx--;
+            }
+        }
+    }
+    
+    return stk;
+}
+```
+
+### 다른 사람 코드
+
+```jsx
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// arr_len은 배열 arr의 길이입니다.
+int* solution(int arr[], size_t arr_len) {
+    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
+    int* stk = (int*)malloc(arr_len * sizeof(int));
+    int i =0 , count=0;
+    while(i<arr_len){
+        if(stk==NULL){
+            stk[count]=arr[i];
+            i++;
+            count++;
+        }
+        else if(stk[count-1]<arr[i]){
+            stk[count]=arr[i];
+            i++;
+            count++;
+        }
+        else if(stk[count-1]>=arr[i]){
+            count--;
+        }
+    }
+    return stk;
+}
+```
+
+<aside>
+💡
+
+차이점: 나는 고정 크기 배열과 idx를 사용했는데, 다른 사람은 동적 메모리 할당 크기를 조정하고 count를 사용함. 
+
+</aside>
