@@ -1,0 +1,111 @@
+#1
+#include <stdio.h>
+
+int main(void)
+{
+	int i = 3000;
+	int* p = NULL;
+	p = &i;
+	printf("i = %d\n", i);
+	printf("&i=%u\n\n", &i);
+	printf("p=%u\n", p);
+	printf("*p=%d\n\n", *p);
+
+	return 0;
+}
+
+#2 
+#include <stdio.h>
+
+int main(void)
+{
+	int i = 3000;
+	int* p = NULL;
+	p = &i;
+	printf("i = %d\n", i);
+	printf("&i=%u\n\n", &i);
+	printf("p=%u\n", p);
+	printf("*p=%d\n\n", *p);
+
+	return 0;
+}
+
+#3
+#include <stdio.h>
+int main(void) {
+	int i = 10; // 변수 선언
+	int* p; //포인터 값 선언
+	p = &i; // 변수 i의 주소를 포인터 p에 대입
+	printf("i=%d\n", i); 
+	*p = 20; // 포인터를 통해 변수의 값 변경
+	printf("i=%d\n", i);
+	return 0;
+}
+
+#4
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+	void ChangeDouble(int* p) { 
+    *p = *p * 3;
+}
+int main()
+{
+    int num;
+    printf("숫자를 입력하시오 : ");
+    scanf_s("%d", &num); 
+    ChangeDouble(&num);
+    printf("%d\n", num);
+    return 0;
+}
+
+#5
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+int main()
+{
+    int num;
+    int* numP = &num;
+    printf("숫자를 입력하시오 : ");
+    scanf_s("%d", &num); 
+    printf("num : %d\n*numP : %d\n\n", num, *numP);
+    printf("&num : %d\nnumP : %d\n\n", &num, numP); 
+}
+
+
+#6
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+void ChangeDouble(int* p) {
+    *p = *p * *p;
+}
+int main()
+{
+    int num;
+    printf("숫자를 입력하시오 : ");
+    scanf("%d", &num);
+    ChangeDouble(&num);
+    printf("제곱 : %d\n", num);
+    return 0;
+}
+
+#7
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+void ChangeNumbers(int* p1, int* p2) /*포인터 2개 인자로 받음*/
+{
+	int temp = *p1; 
+	*p1 = *p2;
+	*p2 = temp;
+}
+int main(void) {
+	int num1;
+	int num2;
+	printf("숫자1 : ");
+	scanf("%d", &num1);
+	printf("숫자2 : ");
+	scanf("%d", &num2);
+	printf("바꾸기 전..\n 숫자1 : %d, 숫자2 : %d\n", num1, num2);
+	ChangeNumbers(&num1, &num2);
+	printf("바꾼 후..\n 숫자1 : %d, 숫자2 : %d\n", num1, num2);
+	return 0;
+}
