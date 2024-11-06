@@ -1,0 +1,128 @@
+#1 
+#include <stdio.h>
+
+void swap(int* cc, int* dd)
+{
+int temp;
+temp = *cc;
+cc = dd;
+dd = temp;
+}
+
+void point_array(int arr, int size)
+{
+int i = 0;
+for (i = 0; i < size; i++)
+{
+printf("%d", arr[i]);
+}
+printf("\n");
+}
+
+void inverter(int arr, int size)
+{
+int i, j;
+for (i = 0; i < size - 1; i++)
+{
+for (j = 0; j < size - 1 - i; j++)
+{
+if (arr[j] < arr[j + 1])
+{
+swap(&arr[j], &arr[j + 1]);
+}
+point_array(arr, size);
+}
+}
+}
+
+int main(void)
+{
+int array[8] = { 1, 5, 4, 6, 8, 7, 2, 3 };
+
+int p = array;
+
+printf("array address : %ld\n", array);
+printf("point address : %ld\n", p);
+printf("array address : %ld\n", &array[0]);
+
+printf("array[0] : %ld\n", array[0]);
+printf("(p+0) : %ld\n", *(p + 0));
+
+printf("array[1] : %ld\n", array[1]);
+printf("(p+1) : %ld\n", *(p + 1));
+
+printf("정렬 전: ");
+
+for (int i = 0; i < 8; i++)
+{
+printf("%d", array[i]);
+}
+printf("\n");
+
+inverter(array, 8);
+}
+
+#2
+
+#include <stdio.h>
+
+void swap(int* cc, int* dd)
+{
+int temp;
+temp = *cc;
+cc = dd;
+dd = temp;
+}
+
+void point_array(int arr, int size)
+{
+int i = 0;
+for (i = 0; i < size; i++)
+{
+printf("%d", arr[i]);
+}
+printf("\n");
+}
+
+void inverter(int arr, int size)
+{
+int i, j;
+for (i = 0; i < size - 1; i++)
+{
+for (j = 0; j < size - 1 - i; j++)
+{
+if (arr[j] < arr[j + 1])
+{
+swap(&arr[j], &arr[j + 1]);
+}
+point_array(arr, size);
+}
+}
+}
+
+int main(void)
+{
+int array[8] = { 1, 5, 4, 6, 8, 7, 2, 3 };
+
+int p = array;
+
+printf("array address : %ld\n", array);
+printf("point address : %ld\n", p);
+printf("array address : %ld\n", &array[0]);
+
+printf("array[0] : %ld\n", array[0]);
+printf("(p+0) : %ld\n", *(p + 0));
+
+printf("array[1] : %ld\n", array[1]);
+printf("(p+1) : %ld\n", *(p + 1));
+
+printf("정렬 전: ");
+
+for (int i = 0; i < 8; i++)
+{
+printf("%d", array[i]);
+}
+printf("\n");
+
+inverter(array, 8);
+}
