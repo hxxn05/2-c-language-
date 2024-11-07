@@ -1,0 +1,168 @@
+*포인터와 배열의 관계
+#include <stdio.h>
+
+int main()
+{
+    int arr[3] = { 1, 2, 3 };
+
+    printf("배열의 이름 : %p\n", arr);
+
+    printf("첫 번째 요소 : %p\n", &arr[0]);
+    printf("두 번째 요소 : %p\n", &arr[1]);
+    printf("세 번째 요소 : %p\n", &arr[2]);
+    printf("\n");
+    printf("첫 번째 요소 : %p\n", arr+0);
+    printf("두 번째 요소 : %p\n", arr+1);
+    printf("세 번째 요소 : %p\n", arr+2);
+
+    return 0;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+*포인터 연산
+#include <stdio.h>
+
+int main()
+{
+    char* ptr1 = NULL;
+    int* ptr2 = NULL;
+    double* ptr3 = NULL;
+
+    printf("%d번지, %d번지, %d번지 \n\n", ptr1, ptr2, ptr3);
+
+    printf("sizeof (char) = %d\n\n", sizeof(char));
+    printf("sizeof (int) = %d\n\n", sizeof(int));
+    printf("sizeof (double) = %d\n\n", sizeof(double));
+    ptr1++;
+    ptr2++;
+    ptr3++;
+
+    printf("%d번지, %d번지, %d번지 \n\n", ptr1, ptr2, ptr3);
+
+    return 0;
+}
+
+#include <stdio.h>
+ 
+int main()
+{
+    int arr[5] = { 1, 2, 3, 4, 5 };
+ 
+    int * ptr = arr;
+ 
+    printf("%d %d %d %d %d\n\n", *ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3), *(ptr + 4));
+    printf("%d %d %d %d %d\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
+ 
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    int arr[3] = { 1, 2, 3 };
+
+    int* ptr = arr;
+
+    printf("%d %d %d\n\n", *ptr, *(ptr + 1), *(ptr + 2));
+    printf("%d %d %d\n\n", ptr[0], ptr[1], ptr[2]);
+    printf("%d %d %d\n\n", *arr, *(arr + 1), *(arr + 2));
+    printf("%d %d %d\n\n", arr[0], arr[1], arr[2]);
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    int arr[3] = { 1, 2, 3 };
+
+    int* ptr = arr;
+
+    printf("%d %d %d\n\n", *ptr, *(ptr + 1), *(ptr + 2));
+    printf("%d %d %d\n\n", ptr[0], ptr[1], ptr[2]);
+    printf("%d %d %d\n\n", *arr, *(arr + 1), *(arr + 2));
+    printf("%d %d %d\n\n", arr[0], arr[1], arr[2]);
+
+    return 0;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+*포인터 배열
+#include <stdio.h>
+ 
+int main()
+{
+    int num1 = 1, num2 = 2, num3 = 3;
+    int * arr[3] = { &num1, &num2, &num3 };    // 포인터 배열 선언 및 초기화
+ 
+    printf("주소값 : %p %p %p\n", arr[0], arr[1], arr[2]);
+    printf("값 : %d %d %d\n", *arr[0], *arr[1], *arr[2]);
+ 
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    int num1[2] = { 1,2 };
+    int num2[2] = { 3,4 };
+    int num3[2] = { 5,6 };
+    int* arr[3] = { num1, num2, num3 };   
+
+    printf("주소값 : %p %p %p\n", arr[0], arr[1], arr[2]);
+    printf("값 : %d %d %d\n", *arr[0], *arr[1], *arr[2]);
+    printf("값 : %d %d %d\n", *arr[0]+1, *arr[1]+1, *arr[2]+1);
+    printf("값 : %d %d %d\n", arr[0][1], arr[1][1], arr[2][1]);
+
+    return 0;
+}
+
+#include <stdio.h>
+ 
+int main()
+{
+    char * strarr[3] = {"halla", "university", "C_language"}; 
+ 
+    printf("%s %s %s\n", strarr[0], strarr[1], strarr[2]);
+ 
+    return 0;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+*배열 포인터
+#include <stdio.h>
+
+int main()
+{
+    int arr2d[2][3] ={
+    {10, 20, 30},
+    {40, 50, 60},
+    };
+
+    printf("%d %d\n", *arr2d[0], *arr2d[1]);
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    int arr2d[2][3] = {
+    {10, 20, 30},
+    {40, 50, 60},
+    };
+
+    int i, j;
+
+    int(*ptr)[3] = arr2d;  
+
+    for (i = 0; i < 2; ++i)
+    {
+        for (j = 0; j < 3; ++j)
+            printf("%d ", ptr[i][j]);   
+        printf("\n");
+    }
+
+    return 0;
+}
