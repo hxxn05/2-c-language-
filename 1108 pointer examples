@@ -1,0 +1,161 @@
+//#1
+// #include <stdio.h>
+//
+//void swap(int* cc, int* dd)
+//{
+//	int temp;
+//	temp = *cc;
+//	*cc = *dd;
+//	*dd = temp;
+//}
+//
+//void point_array(int* arr, int size)
+//{
+//	int i = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		printf("%d", arr[i]);
+//	}
+//	printf("\n");
+//}
+//
+//void bubble_sort(int* arr, int size)
+//{
+//	int i, j;
+//	for (i = 0; i < size - 1; i++)
+//	{
+//		for (j = 0; j < size - 1 - i; j++)
+//		{
+//			if (arr[j] > arr[j + 1])
+//			{
+//				swap(&arr[j], &arr[j + 1]);
+//			}
+//			point_array(arr, size);
+//		}
+//	}
+//	printf("\n");
+//}
+//
+//void sort_min_max(int* arr, int size, int* min, int* max)
+//{
+//	*max = arr[0];
+//	*min = arr[0];
+//
+//	for (int i = 1; i < size; i++)
+//	{
+//		if (*max < arr[i])
+//		{
+//			*max = arr[i];
+//		}
+//		if (*min > arr[i])
+//		{
+//			*min = arr[i];
+//		}
+//
+//	}
+//}
+//
+//int main(void)
+//{
+//	int array[8] = { 1, 5, 4, 6, 8, 7, 2, 3 };
+//	int* p = array;
+//	int min = 0;
+//	int max = 0;
+//
+//	printf("정렬 전: ");
+//
+//	for (int i = 0; i < 8; i++)
+//	{
+//		printf("%d", array[i]);
+//	}
+//	printf("\n");
+//
+//	bubble_sort(array, 8);
+//
+//	sort_min_max(array, 8, &min, &max);
+//
+//	printf("최대값은: %d\n", max);
+//	printf("최소값은: %d\n", min);
+//}
+//#2
+//#include <stdio.h>
+//
+//void double_num(int num, int* double_number)
+//{
+//	*double_number = num * 2; 
+//}
+//
+//void triple_num(int num, int* triple_number)
+//{
+//	*triple_number = num * 3; 
+//}
+//
+//int main(void)
+//{
+//	int num = 0;
+//	int double_number, triple_number = 0;
+//	printf("수를 입력하세요: ");
+//	scanf_s("%d", &num);
+//
+//	double_num(num, &double_number);
+//	triple_num(num, &triple_number);
+//	 
+//	printf("입력값의 2배: %d\n", double_number); 
+//	printf("입력값의 3배: %d", triple_number);   
+//
+//	return 0;
+//}
+
+//#3
+//#include <stdio.h>
+//
+//void square_num(int num, int* square_number)
+//{
+//	*square_number = num * num;
+//}
+//
+//int main(void)
+//{
+//	int num = 0;
+//	int square_number = 0;
+//
+//	printf("수를 입력하시오 : ");
+//	scanf_s("%d", &num);
+//
+//	square_num(num, &square_number);
+//
+//	printf("입력값의 제곱값: %d\n", square_number);
+//
+//	return 0;
+//}
+
+//#4
+#define _CRT_SECURE_NO_WARNINGS_
+#include <stdio.h>
+
+void inverter(int* arr, int size)
+{
+	printf("입력받은 수의 역순: ");
+	for (int i = size - 1; i >= 0; i--)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+int main(void)
+{
+	int arr[5] = { 0 };
+
+	printf("수를 입력하시오: ");
+	for (int i = 0; i < 5; ++i)
+	{
+		scanf_s("%d", &arr[i]);
+	}
+
+	inverter(arr, 5);
+
+	return 0;
+}
+
+
