@@ -1,0 +1,80 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int* data = NULL;
+int no_data = -1;
+
+void read_data_file(const char* file_path)
+{
+    FILE* fp;
+
+    printf("waypoint file: %s\n", file_path);
+
+    fp = fopen(file_path, "r");
+    if (fp == NULL)
+    {
+        printf("파일이 존재하지 않습니다!\n");
+        exit(1);
+    }
+
+    no_data = 0;
+
+    int temp, result;
+
+    do
+    {
+        result = fscanf(fp, "%d", &temp);
+        if (result != EOF)
+        {
+            no_data++;
+        }
+    } while (result != EOF);
+
+    data = (int*)malloc(no_data * sizeof(int));
+    if (data == NULL)
+    {
+        printf("메모리 할당 실패!\n");
+        fclose(fp);
+        exit(1);
+    }
+
+    rewind(fp);
+    for (int i = 0; i < no_data; i++)
+    {
+        fscanf(fp, "%d", &data[i]);
+    }
+
+    fclose(fp);
+    printf("파일 읽기 완료: 총 %d개의 데이터\n", no_data);
+}
+
+void print_data()
+{
+    if (data == NULL || no_data <= 0)
+    {
+        printf("출력할 데이터가 없습니다.\n");
+        return;
+    }
+
+    printf("데이터 출력:\n");
+    for (int i = 0; i < no_data; i++) 
+    {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+}
+
+int main() 
+{
+    const char* file_path = "data.txt";
+    read_data_file(file_path);
+    print_data();
+
+    if (data != NULL) 
+    {
+        free(data);
+    }
+
+    return 0;
+}
