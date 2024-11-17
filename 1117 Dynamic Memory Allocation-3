@@ -1,0 +1,108 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int no_data = -1;
+int result;
+
+double* read_data_file(const char* file_path)
+{
+    FILE* fp;
+    double* data;
+
+    printf("waypoint file: %s\n", file_path);
+
+    fp = fopen(file_path, "r");
+    if (fp == NULL)
+    {
+        printf("파일이 존재하지 않습니다!\n");
+        exit(1);
+    }
+    else
+    {
+        no_data = 0;
+    }
+
+    do
+    {
+        int temp;
+        result = fscanf(fp, "%d", &temp);
+        if (result != EOF)
+        {
+            no_data++;
+        }
+    } while (result != EOF);
+
+    fclose(fp);
+
+    fp = fopen(file_path, "r");
+
+    data = (double*)malloc(no_data * sizeof(double));
+
+    for (int i = 0; i < no_data; i++)
+    {
+        fscanf(fp, "%lf", &data[i]);
+    }
+
+    fclose(fp);
+    printf("파일 읽기 완료: 총 %d개의 데이터\n", no_data);
+
+    return data;
+}
+
+void swap(double* cc, double* dd)
+{
+    int temp;
+
+    temp = *cc;
+    *cc = *dd;
+    *dd = temp;
+}
+
+void print_data(double* data)
+{
+    if (data == NULL || no_data <= 0)
+    {
+        printf("출력할 데이터가 없습니다.\n");
+        return;
+    }
+
+    printf("데이터 출력: ");
+    for (int i = 0; i < no_data; i++)
+    {
+        printf("%.0lf ", data[i]);
+    }
+    printf("\n");
+}
+
+void sort(double* arr, int size)
+{
+    int temp = 0;
+
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                swap(&arr[j], &arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main()
+{
+    const char* file_path = "data.txt";
+    double* data_array = read_data_file(file_path);
+    print_data(data_array);
+    sort(data_array, no_data);
+    print_data(data_array);
+
+    if (data_array != NULL)
+    {
+        free(data_array);
+    }
+
+    return 0;
+}
