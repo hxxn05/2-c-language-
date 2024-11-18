@@ -1,41 +1,32 @@
-1.
-struct score
+#include <stdio.h>
+
+struct student
 {
-int scoreKOR;
-int scoreMAT;
-int scoreENG;
-int scoreSCI;
+	int number;
+	char name[10];
+	double grade;
 }
+;
 
-
-2.
-struct score
+int main(void)
 {
-int scoreKOR;
-int scoreMAT;
-int scoreENG;
-int scoreSCI;
+	struct student list[3];
+
+	for (int i = 0; i < 3; ++i)
+	{
+		printf("학번: ");
+		scanf_s("%d", &list[i].number);
+
+		printf("이름: ");
+		scanf_s("%s", list[i].name, 10);
+
+		printf("학점: ");
+		scanf_s("%lf", &list[i].grade);
+	}
+
+	for (int i = 0; i < 3; ++i)
+		printf("학번: %d\n 이름 : %s\n학점 : %lf\n\n", list[i].name, list[i].grade);
+
+	return 0;
+
 }
-
-
-void main()
-{
-struct score a;
- 
-}
-
-
-3.
-struct score a[10];
- 
-a[0].scoreKOR = 100;
-a[0].scoreMAT = 75;
-a[0].scoreENG = 87;
-a[0].scoreSCI = 97;
- 
-a[1].scoreKOR = 68;
-a[1].scoreMAT = 42;
-a[1].scoreENG = 100;
-a[1].scoreSCI = 74;
- 
-..
