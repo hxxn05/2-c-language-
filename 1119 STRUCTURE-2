@@ -1,0 +1,41 @@
+1.
+struct score
+{
+int scoreKOR;
+int scoreMAT;
+int scoreENG;
+int scoreSCI;
+}
+
+
+2.
+struct score
+{
+int scoreKOR;
+int scoreMAT;
+int scoreENG;
+int scoreSCI;
+}
+
+
+void main()
+{
+struct score a;
+ 
+}
+
+
+3.
+struct score a[10];
+ 
+a[0].scoreKOR = 100;
+a[0].scoreMAT = 75;
+a[0].scoreENG = 87;
+a[0].scoreSCI = 97;
+ 
+a[1].scoreKOR = 68;
+a[1].scoreMAT = 42;
+a[1].scoreENG = 100;
+a[1].scoreSCI = 74;
+ 
+..
