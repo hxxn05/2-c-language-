@@ -1,0 +1,88 @@
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <string.h>
+//
+//
+//struct student
+//{
+//	int number;
+//	char name[10];
+//	double grade;
+//}s1;
+//int main(void)
+//{
+//	struct student s1 = { 202415023, "Yoon", 1 };
+//	s1.number = 202415023;
+//	strcpy(s1.name, "Yoon");
+//	s1.grade = 1;
+//
+//	printf("학번: %d\n이름: %s\n학년: %f\n ", s1.number, s1.name, s1.grade);
+//
+//	return 0;
+//}
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <string.h>
+//
+//struct student {
+//    int number;
+//    char name[10];
+//    double grade;
+//};
+//
+//int main(void) {
+//    struct student s1 = { 202415023, "Yoon", 1 };
+//
+//    printf("학번: %d\n이름: %s\n학년: %.2f\n", s1.number, s1.name, s1.grade);
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//struct student {
+//
+//    int number;
+//    char name[10];
+//    double grade;
+//}s1;
+//
+//int main(void) {
+//
+//    printf("학번: ");
+//    scanf_s("%d", &s1.number);
+//
+//    printf("이름: ");
+//    scanf_s("%s", s1.name, 10);
+//
+//    printf("학점: ");
+//    scanf_s("%lf", &s1.grade);
+//
+//    printf("학번: %d\n이름: %s\n학점: %f\n\n", s1.number, s1.name, s1.grade);
+//
+//    return 0;
+//}
+
+#include <stdio.h>
+
+struct point {
+    int x, y;
+};
+
+int main(void) {
+
+    struct point p1 = { 10, 20 };
+    struct point p2 = { 10, 10 };
+    struct point p3 = p1; // 구조체 변수 대입
+
+    printf("p3의 좌표: %d %d\n", p3.x, p3.y);
+
+    // 구조체 변수의 비교
+    if (p1.x == p2.x && p1.y == p2.y)
+        printf("p1과 p2의 좌표는 같습니다.\n");
+    else
+        printf("p1과 p2의 좌표는 다릅니다.\n");
+
+    return 0;
+}
