@@ -1,0 +1,116 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <math.h>
+
+int n = 0;
+
+struct waypoint 
+{
+    double X;
+    double Y;
+    double Angle;
+    double X_ref;
+    double Y_ref;
+    double Dist;
+};
+
+void read_file(const char* filename, struct waypoint waypoints[])
+{
+    FILE* file = fopen(filename, "r");
+
+    if (file == NULL)
+    {
+        printf("File doesn't exist\n");
+        return;
+    }
+
+    while (fscanf(file, "%lf %lf %lf", &waypoints[n].X, &waypoints[n].Y, &waypoints[n].Angle) != EOF)
+    {
+        n++;
+        if (n >= 100)
+        {
+            break;
+        }
+    }
+
+    fclose(file);
+}
+
+void interval(struct waypoint waypoints[])
+{
+    for (int i = 1; i < n; ++i)
+    {
+        waypoints[i].X_ref = waypoints[i].X - waypoints[i - 1].X;
+        waypoints[i].Y_ref = waypoints[i].Y - waypoints[i - 1].Y;
+    }
+}
+
+void relative_coordinate(struct waypoint waypoints[])
+{
+    for (int i = 0; i < n; ++i)
+    {
+        waypoints[i].X_ref = waypoints[i].X - waypoints[0].X;
+        waypoints[i].Y_ref = waypoints[i].Y - waypoints[0].Y;
+    }
+}
+
+void DIST(struct waypoint waypoints[])
+{
+    for (int i = 1; i < n; ++i)
+    {
+        waypoints[i].Dist = sqrt(
+            (waypoints[i].X - waypoints[i - 1].X) * (waypoints[i].X - waypoints[i - 1].X) +
+            (waypoints[i].Y - waypoints[i - 1].Y) * (waypoints[i].Y - waypoints[i - 1].Y));
+    }
+}
+
+int main(void)
+{
+    struct waypoint waypoints[100] = { 0 };
+    int num = 0;
+
+    printf("(1) waypoint 데이터 출력\n");
+    printf("(2) waypoint 간의 간격 출력\n");
+    printf("(3) waypoint 상대좌표 출력\n");
+    printf("(4) waypoint 거리 출력\n");
+    scanf("%d", &num);
+
+    read_file("waypoint.txt", waypoints);
+
+    if (num == 1)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            printf("X[%d] = %lf, Y[%d] = %lf, Angle[%d] = %lf\n",
+                i, waypoints[i].X, i, waypoints[i].Y, i, waypoints[i].Angle);
+        }
+    }
+    else if (num == 2)
+    {
+        interval(waypoints);
+        for (int i = 1; i < n; i++)
+        {
+            printf("Interval - X_ref[%d] = %lf, Y_ref[%d] = %lf\n",
+                i, waypoints[i].X_ref, i, waypoints[i].Y_ref);
+        }
+    }
+    else if (num == 3)
+    {
+        relative_coordinate(waypoints);
+        for (int i = 0; i < n; i++)
+        {
+            printf("Relative Coordinate - X_ref[%d] = %lf, Y_ref[%d] = %lf\n",
+                i, waypoints[i].X_ref, i, waypoints[i].Y_ref);
+        }
+    }
+    else if (num == 4)
+    {
+        DIST(waypoints);
+        for (int i = 1; i < n; i++)
+        {
+            printf("Distance[%d] = %lf\n", i, waypoints[i].Dist);
+        }
+    }
+
+    return 0;
+}
